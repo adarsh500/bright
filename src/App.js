@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import { useSelector } from 'react-redux';
 import './App.css';
+import { useState } from 'react';
+import Modal from './components/Modal';
 
 function App() {
+  const total = useSelector((state) => state.total);
+  const bills = useSelector((state) => state.bills);
+  const [isEdit, setIsEdit] = useState(false);
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Bill Tracker</h1>
+      <div className="bills">
+        {bills.map((bill) => (
+          <div className="bill" key={bill.id}>
+            <h3>
+              {bill.description} {bill.amount}
+            </h3>
+            <p>{bill.category}</p>
+            <p>{bill.date}</p>
+          </div>
+        ))}
+      </div>
+      <button onClick={() => setOpen(!open)}>Add Bill</button>
+      <Modal show={open} onClose={() => setOpen(!open)} />
+      <h2>Your bill for this month is {total}</h2>
     </div>
   );
 }
