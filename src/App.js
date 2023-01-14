@@ -10,7 +10,7 @@ import BillCard from './components/BillCard';
 function App() {
   const total = useSelector((state) => state.total);
   const bills = useSelector((state) => state.bills);
-  console.log('this is billllll', bills)
+  console.log('this is billllll', bills);
   const categories = useSelector((state) => state.categories);
   const [filter, setFilter] = useState('All');
   const [open, setOpen] = useState(false);
@@ -51,53 +51,53 @@ function App() {
         <h1>Expense Tracker</h1>
       </div>
       <div className={styles.body}>
-        <div>
-          <div className={styles.left}>
-            <button
-              className={styles.primaryButton}
-              onClick={() => setOpen(!open)}
-            >
-              Add Bill
-            </button>
-            <div className={styles.bills}>
-              {filter === 'All'
-                ? bills
-                    .sort((a, b) => {
-                      const dateA = a.date.split('-');
-                      const dateB = b.date.split('-');
-                      const date1 = new Date(dateA[2], dateA[0] - 1, dateA[1]);
-                      const date2 = new Date(dateB[2], dateB[0] - 1, dateB[1]);
-                      return date1 - date2;
-                    })
-                    .map((bill) => (
-                      <Bill
-                        key={bill.id}
-                        bill={bill}
-                        due={bill.due}
-                        handleDelete={handleDelete}
-                        handleEdit={handleEdit}
-                      />
-                    ))
-                : bills
-                    .filter((bill) => bill.category === filter)
-                    .sort((a, b) => {
-                      const dateA = a.date.split('-');
-                      const dateB = b.date.split('-');
-                      const date1 = new Date(dateA[2], dateA[0] - 1, dateA[1]);
-                      const date2 = new Date(dateB[2], dateB[0] - 1, dateB[1]);
-                      return date1 - date2;
-                    })
-                    .map((bill) => (
-                      <Bill
-                        key={bill.id}
-                        bill={bill}
-                        handleDelete={handleDelete}
-                        handleEdit={handleEdit}
-                      />
-                    ))}
-            </div>
-            {open && <Modal setIsOpen={setOpen} />}
+        {/* <div> */}
+        <div className={styles.left}>
+          <button
+            className={styles.primaryButton}
+            onClick={() => setOpen(!open)}
+          >
+            Add Bill
+          </button>
+          <div className={styles.bills}>
+            {filter === 'All'
+              ? bills
+                  .sort((a, b) => {
+                    const dateA = a.date.split('-');
+                    const dateB = b.date.split('-');
+                    const date1 = new Date(dateA[2], dateA[0] - 1, dateA[1]);
+                    const date2 = new Date(dateB[2], dateB[0] - 1, dateB[1]);
+                    return date1 - date2;
+                  })
+                  .map((bill) => (
+                    <Bill
+                      key={bill.id}
+                      bill={bill}
+                      due={bill.due}
+                      handleDelete={handleDelete}
+                      handleEdit={handleEdit}
+                    />
+                  ))
+              : bills
+                  .filter((bill) => bill.category === filter)
+                  .sort((a, b) => {
+                    const dateA = a.date.split('-');
+                    const dateB = b.date.split('-');
+                    const date1 = new Date(dateA[2], dateA[0] - 1, dateA[1]);
+                    const date2 = new Date(dateB[2], dateB[0] - 1, dateB[1]);
+                    return date1 - date2;
+                  })
+                  .map((bill) => (
+                    <Bill
+                      key={bill.id}
+                      bill={bill}
+                      handleDelete={handleDelete}
+                      handleEdit={handleEdit}
+                    />
+                  ))}
           </div>
+          {open && <Modal setIsOpen={setOpen} />}
+          {/* </div> */}
         </div>
         <div className={styles.right}>
           <div className={styles.filters}>
