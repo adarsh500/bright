@@ -53,16 +53,27 @@ const initialState = {
     },
   ],
   total: 44810,
+  categories: [
+    'All',
+    'Food & Dining',
+    'FoodNDining',
+    'shopping',
+    'Travel',
+    'Personal Care',
+    'education',
+    'utility',
+  ],
 };
 
-console.log(initialState.bills.reduce((a, b) => a + parseInt(b.amount), 0));
-
 const reducer = (state = initialState, action) => {
+  console.log(state);
   switch (action.type) {
     case 'ADD_BILL':
+      const id = state.bills.length + 1;
+      const payload = { ...action.payload, id };
       return {
         ...state,
-        bills: [...state.bills, action.payload],
+        bills: [...state.bills, payload],
       };
     case 'DELETE_BILL':
       return {
@@ -94,10 +105,19 @@ const reducer = (state = initialState, action) => {
         bills: state.bills.filter((bill) => bill.category === action.payload),
       };
     case 'CALCULATE_BILL':
-      return {
-        ...state,
-        bills: state.bills.reduce((a, b) => a + b.amount, 0),
-      };
+      if (action.payload === 'All') {
+        return {
+          ...state,
+          total: state.bills.reduce((a, b) => a + parseInt(b.amount), 0),
+        };
+      } else {
+        return {
+          ...state,
+          total: state.bills
+            .filter((bill) => bill.category === action.payload)
+            .reduce((a, b) => a + parseInt(b.amount), 0),
+        };
+      }
     default:
       return state;
   }
