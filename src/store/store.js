@@ -105,7 +105,7 @@ const reducer = (state = initialState, action) => {
         bills: state.bills.filter((bill) => bill.category === action.payload),
       };
     case 'CALCULATE_BILL':
-      if (action.payload === 'All') {
+      if (action.payload === 'All' || action.payload === undefined || null) {
         return {
           ...state,
           total: state.bills.reduce((a, b) => a + parseInt(b.amount), 0),

@@ -13,6 +13,9 @@ const Modal = ({ setIsOpen, isEdit }) => {
 
   const register = () => {
     dispatch({ type: 'ADD_BILL', payload: bill });
+    dispatch({
+      type: 'CALCULATE_BILL',
+    });
   };
 
   return (
@@ -72,7 +75,7 @@ const Modal = ({ setIsOpen, isEdit }) => {
                   <input
                     name="date"
                     type="text"
-                    placeholder="dd-mm-yyyy"
+                    placeholder="mm-dd-yyyy"
                     onChange={handleFormChange}
                   />
                 </div>
