@@ -12,9 +12,12 @@ const BillCard = (props) => {
 
   const handleCalculateBill = () => {
     dispatch({
-      type: 'calculate_min_bill_with_budget_and_category',
-      payload: budget,
+      type: 'SORT_BILL',
     });
+    // dispatch({
+    //   type: 'MIN_BILL',
+    //   payload: budget,
+    // });
   };
 
   return (

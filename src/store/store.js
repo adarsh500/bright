@@ -8,6 +8,7 @@ const initialState = {
       category: 'FoodNDining',
       amount: '430',
       date: '01-02-2020',
+      due: false,
     },
     {
       id: 2,
@@ -15,6 +16,7 @@ const initialState = {
       category: 'utility',
       amount: '500',
       date: '01-06-2020',
+      due: false,
     },
     {
       id: 3,
@@ -22,6 +24,7 @@ const initialState = {
       category: 'shopping',
       amount: '2030',
       date: '01-07-2020',
+      due: false,
     },
     {
       id: 4,
@@ -29,6 +32,7 @@ const initialState = {
       category: 'Food & Dining',
       amount: '35900',
       date: '01-03-2020',
+      due: false,
     },
     {
       id: 5,
@@ -36,6 +40,7 @@ const initialState = {
       category: 'education',
       amount: '2200',
       date: '01-12-2020',
+      due: false,
     },
     {
       id: 6,
@@ -43,6 +48,7 @@ const initialState = {
       category: 'Personal Care',
       amount: '320',
       date: '01-14-2020',
+      due: false,
     },
     {
       id: 7,
@@ -50,6 +56,7 @@ const initialState = {
       category: 'Travel',
       amount: '3430',
       date: '01-18-2020',
+      due: false,
     },
   ],
   total: 44810,
@@ -67,14 +74,20 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(state);
+  console.log('this is state', state);
   switch (action.type) {
     case 'ADD_BILL':
       const id = state.bills.length + 1;
       const payload = { ...action.payload, id };
       return {
         ...state,
-        bills: [...state.bills, payload],
+        bills: [...state.bills, payload].sort((a, b) => {
+          const dateA = a.date.split('-');
+          const dateB = b.date.split('-');
+          const date1 = new Date(dateA[2], dateA[0] - 1, dateA[1]);
+          const date2 = new Date(dateB[2], dateB[0] - 1, dateB[1]);
+          return date1 - date2;
+        }),
       };
     case 'DELETE_BILL':
       return {
@@ -84,21 +97,26 @@ const reducer = (state = initialState, action) => {
     case 'EDIT_BILL':
       return {
         ...state,
-        bills: state.bills.map((bill) =>
-          bill.id === action.payload.id ? action.payload : bill
-        ),
+        bills: state.bills
+          .map((bill) =>
+            bill.id === action.payload.id ? action.payload : bill
+          )
+          .sort((a, b) => {
+            const dateA = a.date.split('-');
+            const dateB = b.date.split('-');
+            const date1 = new Date(dateA[2], dateA[0] - 1, dateA[1]);
+            const date2 = new Date(dateB[2], dateB[0] - 1, dateB[1]);
+            return date1 - date2;
+          }),
       };
     case 'SORT_BILL':
+      const newBills = state.bills
+        .sort((a, b) => parseInt(a.amount) - parseInt(b.amount))
+        .reverse();
+      console.log('new bills', newBills);
       return {
         ...state,
-        bills: state.bills.sort((a, b) => {
-          if (a.date < b.date) {
-            return -1;
-          } else if (a.date > b.date) {
-            return 1;
-          }
-          return 0;
-        }),
+        bills: newBills.map((bill) => bill),
       };
     case 'FILTER_BILL':
       return {
@@ -118,18 +136,29 @@ const reducer = (state = initialState, action) => {
           .filter((bill) => bill.category === action.payload)
           .reduce((a, b) => a + parseInt(b.amount), 0),
       };
-    case 'calculate_min_bill_with_budget': {
-      const minBill = state.bills.reduce((a, b) => {
-        if (a.amount < b.amount) {
-          return a;
-        }
-        return b;
-      });
+
+    case 'MIN_BILL':
+      const { budget } = action.payload;
+      console.log('budget', action.payload);
+      let minBill = 0;
+
       return {
         ...state,
-        minBill,
+        bills: state.bills.map((bill) => {
+          console.log('          billi', bill);
+          if (minBill + parseInt(bill.amount) < parseInt(budget)) {
+            minBill += parseInt(bill.amount);
+            return {
+              ...bill,
+              due: true,
+            };
+          }
+          return {
+            ...bill,
+            due: false,
+          };
+        }),
       };
-    }
 
     default:
       return state;

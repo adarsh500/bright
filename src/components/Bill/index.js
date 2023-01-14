@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styles from './Bill.module.css';
 
 const Bill = (props) => {
-  const { bill, handleDelete, handleEdit } = props;
+  const { bill, handleDelete, handleEdit, due } = props;
   const [editBillData, setEditBillData] = useState({});
   //   setEditBillData(bill);
+  console.log(props);
 
   const [isEdit, setIsEdit] = useState(false);
 
@@ -18,7 +19,7 @@ const Bill = (props) => {
   };
 
   return (
-    <div className={styles.bill}>
+    <div className={due ? styles.billDue : styles.bill}>
       <div className={styles.info}>
         {isEdit ? (
           <input

@@ -10,6 +10,7 @@ import BillCard from './components/BillCard';
 function App() {
   const total = useSelector((state) => state.total);
   const bills = useSelector((state) => state.bills);
+  console.log('this is billllll', bills)
   const categories = useSelector((state) => state.categories);
   const [filter, setFilter] = useState('All');
   const [open, setOpen] = useState(false);
@@ -72,6 +73,7 @@ function App() {
                       <Bill
                         key={bill.id}
                         bill={bill}
+                        due={bill.due}
                         handleDelete={handleDelete}
                         handleEdit={handleEdit}
                       />
