@@ -53,6 +53,7 @@ const initialState = {
     },
   ],
   total: 44810,
+  minBill: 0,
   categories: [
     'All',
     'Food & Dining',
@@ -110,14 +111,26 @@ const reducer = (state = initialState, action) => {
           ...state,
           total: state.bills.reduce((a, b) => a + parseInt(b.amount), 0),
         };
-      } else {
-        return {
-          ...state,
-          total: state.bills
-            .filter((bill) => bill.category === action.payload)
-            .reduce((a, b) => a + parseInt(b.amount), 0),
-        };
       }
+      return {
+        ...state,
+        total: state.bills
+          .filter((bill) => bill.category === action.payload)
+          .reduce((a, b) => a + parseInt(b.amount), 0),
+      };
+    case 'calculate_min_bill_with_budget': {
+      const minBill = state.bills.reduce((a, b) => {
+        if (a.amount < b.amount) {
+          return a;
+        }
+        return b;
+      });
+      return {
+        ...state,
+        minBill,
+      };
+    }
+
     default:
       return state;
   }

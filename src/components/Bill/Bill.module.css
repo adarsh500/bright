@@ -91,3 +91,23 @@
 .secondaryButton:last-child {
   margin-bottom: 0;
 }
+
+.edit {
+  vertical-align: middle;
+  width: 100px;
+  border: none;
+  height: 30px;
+  border-radius: 14px;
+  padding: 3px 6px;
+  margin-bottom: 12px;
+}
+
+.editCategory {
+  vertical-align: middle;
+  width: 100px;
+  border: none;
+  height: 30px;
+  border-radius: 14px;
+  padding: 3px 6px;
+  margin-right: 12px;
+}

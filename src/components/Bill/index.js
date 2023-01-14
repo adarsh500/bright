@@ -26,6 +26,7 @@ const Bill = (props) => {
             type="text"
             value={editBillData.description}
             onChange={handleFormChange}
+            className={styles.edit}
           />
         ) : (
           <p className={styles.primary}>{bill.description}</p>
@@ -37,6 +38,7 @@ const Bill = (props) => {
               type="text"
               value={editBillData.category}
               onChange={handleFormChange}
+              className={styles.editCategory}
             />
           ) : (
             <p className={styles.category}>{bill.category}</p>
@@ -47,6 +49,7 @@ const Bill = (props) => {
               type="text"
               value={editBillData.date}
               onChange={handleFormChange}
+              className={styles.edit}
             />
           ) : (
             <p className={styles.secondary}>{bill.date}</p>
@@ -62,9 +65,10 @@ const Bill = (props) => {
               type="text"
               value={editBillData.amount}
               onChange={handleFormChange}
+              className={styles.edit}
             />
           ) : (
-            <p className={styles.amount}>{bill.amount}$</p>
+            <p className={styles.amount}>${bill.amount}</p>
           )}
         </div>
         <div className={styles.actions}>

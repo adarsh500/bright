@@ -47,7 +47,7 @@ function App() {
   return (
     <div className={styles.App}>
       <div className={styles.header}>
-        <h1>Bill Tracker</h1>
+        <h1>Expense Tracker</h1>
       </div>
       <div className={styles.body}>
         <div>
@@ -60,17 +60,31 @@ function App() {
             </button>
             <div className={styles.bills}>
               {filter === 'All'
-                ? bills.map((bill) => (
-                    <Bill
-                      key={bill.id}
-                      bill={bill}
-                      handleDelete={handleDelete}
-                      handleEdit={handleEdit}
-                    />
-                  ))
+                ? bills
+                    .sort((a, b) => {
+                      const dateA = a.date.split('-');
+                      const dateB = b.date.split('-');
+                      const date1 = new Date(dateA[2], dateA[0] - 1, dateA[1]);
+                      const date2 = new Date(dateB[2], dateB[0] - 1, dateB[1]);
+                      return date1 - date2;
+                    })
+                    .map((bill) => (
+                      <Bill
+                        key={bill.id}
+                        bill={bill}
+                        handleDelete={handleDelete}
+                        handleEdit={handleEdit}
+                      />
+                    ))
                 : bills
                     .filter((bill) => bill.category === filter)
-                    .sort((a, b) => new Date(a.date) - new Date(b.date()))
+                    .sort((a, b) => {
+                      const dateA = a.date.split('-');
+                      const dateB = b.date.split('-');
+                      const date1 = new Date(dateA[2], dateA[0] - 1, dateA[1]);
+                      const date2 = new Date(dateB[2], dateB[0] - 1, dateB[1]);
+                      return date1 - date2;
+                    })
                     .map((bill) => (
                       <Bill
                         key={bill.id}

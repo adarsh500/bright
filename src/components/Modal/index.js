@@ -85,7 +85,7 @@ const Modal = ({ setIsOpen, isEdit }) => {
           <div className={styles.modalActions}>
             <div className={styles.actionsContainer}>
               <button
-                className={styles.primary}
+                className={styles.primaryButton}
                 onClick={() => {
                   register();
                   setIsOpen(false);
