@@ -11,7 +11,7 @@
 .info {
   display: flex;
   flex-direction: column;
-
+  justify-content: center;
   align-items: flex-start;
   margin-left: 10px;
 }
@@ -23,6 +23,11 @@
 }
 
 .category {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;
   margin-right: 16px;
 }
 
@@ -39,4 +44,50 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.primary {
+  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  color: var(--secondaryText);
+  margin: 0;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.amount {
+  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  color: var(--secondaryText);
+  margin: 0;
+  padding: 0;
+}
+
+.secondary {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;
+}
+
+.secondaryButton {
+  width: 90px;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  border: none;
+  background: #fcfcfc;
+  margin-bottom: 12px;
+}
+
+.secondaryButton:last-child {
+  margin-bottom: 0;
 }

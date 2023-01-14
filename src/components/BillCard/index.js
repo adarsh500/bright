@@ -6,7 +6,7 @@ const BillCard = (props) => {
   const [budget, setBudget] = useState(null);
   return (
     <div className={styles.billCard}>
-      <h2>Your bill for this month is {total}</h2>
+      <h2>Your bill for this month is {total}$</h2>
       <div className={styles.budget}>
         <p>Enter monthly budget</p>
         <input

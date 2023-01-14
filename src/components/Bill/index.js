@@ -28,7 +28,7 @@ const Bill = (props) => {
             onChange={handleFormChange}
           />
         ) : (
-          <p>{bill.description}</p>
+          <p className={styles.primary}>{bill.description}</p>
         )}
         <div className={styles.billInfo}>
           {isEdit ? (
@@ -49,7 +49,7 @@ const Bill = (props) => {
               onChange={handleFormChange}
             />
           ) : (
-            <p className={styles.date}>{bill.date}</p>
+            <p className={styles.secondary}>{bill.date}</p>
           )}
         </div>
       </div>
@@ -64,12 +64,13 @@ const Bill = (props) => {
               onChange={handleFormChange}
             />
           ) : (
-            <p>{bill.amount}</p>
+            <p className={styles.amount}>{bill.amount}$</p>
           )}
         </div>
         <div className={styles.actions}>
           {isEdit ? (
             <button
+              className={styles.secondaryButton}
               onClick={() => {
                 setIsEdit(false);
                 handleEdit(editBillData);
@@ -78,12 +79,27 @@ const Bill = (props) => {
               Save{' '}
             </button>
           ) : (
-            <button onClick={() => setIsEdit(true)}>Edit</button>
+            <button
+              className={styles.secondaryButton}
+              onClick={() => setIsEdit(true)}
+            >
+              Edit
+            </button>
           )}
           {isEdit ? (
-            <button onClick={() => setIsEdit(false)}>Cancel </button>
+            <button
+              onClick={() => setIsEdit(false)}
+              className={styles.secondaryButton}
+            >
+              Cancel{' '}
+            </button>
           ) : (
-            <button onClick={() => handleDelete(bill.id)}>Delete</button>
+            <button
+              className={styles.secondaryButton}
+              onClick={() => handleDelete(bill.id)}
+            >
+              Delete
+            </button>
           )}
         </div>
       </div>

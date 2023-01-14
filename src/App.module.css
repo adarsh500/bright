@@ -8,6 +8,13 @@
   align-items: center;
 }
 
+:root {
+  --primary: #17c95f;
+  --secondary: #0f4124;
+  --primaryText: #ffffff;
+  --secondaryText: #3f3f3f;
+}
+
 body {
   background-color: #e3f2e7;
   color: #3f3f3f;
@@ -47,9 +54,17 @@ body {
   width: 100%;
 }
 
-.secondary {
-  font-size: 22px;
+.primary {
   font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  color: var(--secondaryText);
+}
+
+.secondary {
+  font-size: 20px;
+  font-weight: 600;
   line-height: 26px;
 }
 
@@ -83,16 +98,27 @@ body {
 .filters {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
+
+.filter {
+  margin-left: 16px;
+  padding: 6px 12px;
+  border-radius: 14px;
+  border: 1px solid #c2c2c2;
+}
+
+.item {
+  
+}
+
 .body {
   display: flex;
 }
 
 .bills {
   overflow: scroll;
-  max-height: 85vh;
-
-  margin-bottom: 16px;
+  max-height: 82vh;
 }
 
 .bill {
@@ -112,4 +138,5 @@ body {
 .left {
   margin-right: 48px;
   width: 460px;
+  margin-bottom: 16px;
 }

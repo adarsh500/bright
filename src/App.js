@@ -52,13 +52,13 @@ function App() {
       <div className={styles.body}>
         <div>
           <div className={styles.left}>
+            <button
+              className={styles.primaryButton}
+              onClick={() => setOpen(!open)}
+            >
+              Add Bill
+            </button>
             <div className={styles.bills}>
-              <button
-                className={styles.primaryButton}
-                onClick={() => setOpen(!open)}
-              >
-                Add Bill
-              </button>
               {filter === 'All'
                 ? bills.map((bill) => (
                     <Bill
@@ -85,8 +85,8 @@ function App() {
         </div>
         <div className={styles.right}>
           <div className={styles.filters}>
-            <p className={styles.secondary}>Filter Bills by : </p>
-            <select onChange={(e) => filterBills(e)}>
+            <p className={styles.secondary}>Filter by category : </p>{' '}
+            <select onChange={(e) => filterBills(e)} className={styles.filter}>
               {categories.map((category) => (
                 <option value={category} id={category}>
                   {category}
